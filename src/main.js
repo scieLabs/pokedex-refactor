@@ -46,7 +46,7 @@ const displayPokemon = async () => {
                 "bg-[#f6eac4]",
                 "text-center",
                 "shadow-lg",
-                "bg-[url('assets/images/cards-background.png')]",
+                "bg-[url('img/cards-background.png')]",
                 "bg-cover",
                 "min-h-[200px]",
                 "max-h-fit",
