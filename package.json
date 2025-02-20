@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "parcel": "^2.13.3"
+  },
+  "name": "pokedex-refactor",
+  "source": "index.html",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.7",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.7"
+  }
+}
