@@ -1,6 +1,6 @@
 //import fetchPokemon from './mudels/network.js';
-import {searchFunc} from "./mudels/ui.js";
-import {displayPokemon} from "./mudels/ui.js";
+import {searchFunc} from "./modules/ui.js";
+import {displayPokemon} from "./modules/ui.js";
 
 displayPokemon();
 
