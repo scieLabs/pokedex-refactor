@@ -1,4 +1,4 @@
-import fetchPokemon from "./netw.js";
+import fetchPokemon from "./network.js";
 //import addToFavorites from "./storage.js";
 
 //import addToFavorites from './storage.js';

@@ -1,4 +1,4 @@
-import fetchPokemon from './mudels/netw.js';
+import fetchPokemon from './mudels/network.js';
 import addToFavorites from './mudels/storage.js';
 
 
