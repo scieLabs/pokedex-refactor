@@ -3,6 +3,8 @@
 
 //function to remove favourited pokémon
 
+import removeFromFavorites from './mudels/storage.js';
+
 let saveNotes = JSON.parse(localStorage.getItem("note")) || [];
 
 
@@ -21,25 +23,25 @@ const fetchPokemon = async (id) => {
 };
 
 // // Remove from favorites 
-const removeFromFavorites = (pokemon) => {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    const index = favorites.findIndex(fav => fav.id === pokemon.id);
+// const removeFromFavorites = (pokemon) => {
+//     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+//     const index = favorites.findIndex(fav => fav.id === pokemon.id);
 
-    if (index !== -1) {
-        // Remove from favorites.
-        favorites.splice(index, 1);
-        console.log(`${pokemon.name} removed from favorites`);
-    }
+//     if (index !== -1) {
+//         // Remove from favorites.
+//         favorites.splice(index, 1);
+//         console.log(`${pokemon.name} removed from favorites`);
+//     }
 
-    // Save the updated favorites array to localStorage
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+//     // Save the updated favorites array to localStorage
+//     localStorage.setItem("favorites", JSON.stringify(favorites));
 
-    saveNotes = saveNotes.filter((note) => note.pokemonID !== pokemon.id);
-    localStorage.setItem("note", JSON.stringify(saveNotes)); // Update notes in localStorage
+//     saveNotes = saveNotes.filter((note) => note.pokemonID !== pokemon.id);
+//     localStorage.setItem("note", JSON.stringify(saveNotes)); // Update notes in localStorage
 
-    // Reload favorites to reflect the change
-    loadFavorites();
-};
+//     // Reload favorites to reflect the change
+//     loadFavorites();
+// };
 
 const loadFavorites = async () => {
     // Ensure the container exists
@@ -95,11 +97,21 @@ const loadFavorites = async () => {
         pokeType.textContent = `Type: ${pokemonData.types.map(typeInfo => typeInfo.type.name).join(", ")}`;
         pokeType.classList.add("text-[#bc7a25]");
 
-        // Favorite icon (remove from favorites on click)
-        const favoriteText = document.createElement("i");
-        favoriteText.id = `favorite-${pokemonData.id}`;
-        favoriteText.classList.add("fa","fa-heart","text-lg","cursor-pointer","text-red-400","block", "m-1");
-        favoriteText.addEventListener("click", () => removeFromFavorites(pokemonData));
+   // Favorite icon (remove from favorites on click) 
+const favoriteText = document.createElement("i");
+favoriteText.id = `favorite-${pokemonData.id}`;
+favoriteText.classList.add("fa", "fa-heart", "text-lg", "cursor-pointer", "text-red-400", "block", "m-1");
+
+// Add event listener to remove from favorites
+favoriteText.addEventListener("click", () => {
+    // Ensure removeFromFavorites is correctly called with pokemonData and favoriteText
+    window.removeFromFavorites(pokemonData, favoriteText);
+    // Reload favorites if the function exists
+    if (typeof loadFavorites === "function") {
+        loadFavorites();
+    }
+
+});
 
         const addNoteContainer = document.createElement("div");
         addNoteContainer.classList.add("flex","justify-center");
