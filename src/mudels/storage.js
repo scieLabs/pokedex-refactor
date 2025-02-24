@@ -9,7 +9,7 @@ try {
 }
 
 // Function to add a Pokémon to favorites
-const addToFavorites = (pokemon, favoriteIcon) => {
+export const addToFavorites = (pokemon, favoriteIcon) => {
     if (!favorites.some(fav => fav.id === pokemon.id)) {
         favorites.push({
             id: pokemon.id,
@@ -31,7 +31,7 @@ const addToFavorites = (pokemon, favoriteIcon) => {
 };
 
 // Function to remove a Pokémon from favorites
-const removeFromFavorites = (pokemon, favoriteIcon) => {
+export const removeFromFavorites = (pokemon, favoriteIcon) => {
     console.log(pokemon);  // Debugging to check if correct data is received
 
     favorites = favorites.filter(fav => fav.id !== pokemon.id);
@@ -51,6 +51,3 @@ const removeFromFavorites = (pokemon, favoriteIcon) => {
     
 };
 
-// Make functions globally accessible
-window.removeFromFavorites = removeFromFavorites;
-window.addToFavorites = addToFavorites;

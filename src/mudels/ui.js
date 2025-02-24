@@ -1,15 +1,13 @@
 import fetchPokemon from "./network.js";
-//import addToFavorites from "./storage.js";
-
-//import addToFavorites from './storage.js';
-//import removeFromFavorites from './storage.js';
+import { addToFavorites } from "./storage.js";
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 const cardsContainer = document.getElementById('cards-container');
+const searchElement = document.querySelector("#search-bar input");
 const pokeNames = [];
 const pokeIds = [];
 
-const displayPokemon = async () => {
+export const displayPokemon = async () => {
     for (let i = 1; i <= 151; i++) {
         const pokemon = await fetchPokemon(i);
         console.log("Received data:", pokemon);
@@ -87,30 +85,18 @@ const displayPokemon = async () => {
 
 };
 
-const addToFavorites = (pokemon,favoriteIcon) => {
 
-    if (!favorites.some(fav => fav.id === pokemon.id)) {
-      favorites.push({ id: pokemon.id, name: pokemon.name, image: pokemon.sprites.front_default });
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+export const searchFunc = () => 
+    { 
+        searchElement.addEventListener("keyup", function (e) {
+            const searchText = e.target.value;
 
-      favoriteIcon.classList.add("fa");
-      favoriteIcon.classList.remove("fa-regular");
-      alert(`${pokemon.name} added to favorites!`);
-    } else {
-      alert(`${pokemon.name} is already in favorites.`);
+            if (!isNaN(searchText))
+                searchById(searchText);
+            else
+                searchByName(searchText);
+        }); 
     }
-  };
-
-  const searchElement = document.querySelector("#search-bar input");
-
-searchElement.addEventListener("keyup", function (e) {
-    const searchText = e.target.value;
-
-    if (!isNaN(searchText))
-        searchById(searchText);
-    else
-        searchByName(searchText);
-});
 
 
 const searchByName = (searchName) => {
@@ -131,6 +117,5 @@ const searchById = (searchId) => {
             pokeId.parentElement.parentElement.classList.add("hidden");
     })
 }
-  displayPokemon();
 
 //export default {displayPokemon, addToFavorites};
