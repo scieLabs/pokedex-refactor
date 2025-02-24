@@ -32,12 +32,14 @@ export const addToFavorites = (pokemon, favoriteIcon) => {
 
 // Function to remove a Pokémon from favorites
 export const removeFromFavorites = (pokemon, favoriteIcon) => {
-    console.log(pokemon);  // Debugging to check if correct data is received
+    //console.log(pokemon);  // Debugging to check if correct data is received
 
     favorites = favorites.filter(fav => fav.id !== pokemon.id);
     localStorage.setItem("favorites", JSON.stringify(favorites));
-    // saveNotes = saveNotes.filter((note) => note.pokemonID !== pokemon.id);
-    // localStorage.setItem("note", JSON.stringify(saveNotes)); // Update notes in localStorage
+    let saveNotes = JSON.parse(localStorage.getItem("note")) || [];
+
+    saveNotes = saveNotes.filter((note) => note.pokemonID !== pokemon.id);
+    localStorage.setItem("note", JSON.stringify(saveNotes)); // Update notes in localStorage
 
 
     // Update the icon style if provided

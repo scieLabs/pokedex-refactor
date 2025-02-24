@@ -121,8 +121,9 @@ const searchById = (searchId) => {
 
 //export default {displayPokemon, addToFavorites};
 
-let saveNotes = JSON.parse(localStorage.getItem("note")) || [];
+
 export const loadFavorites = async () => {
+    let saveNotes = JSON.parse(localStorage.getItem("note")) || [];
     // Ensure the container exists
     if (!cardsContainer) return;
 
